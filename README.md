@@ -1,2 +1,2 @@
 # gitar
-gitar akor ve tabları
+guitar chords and tabs
