@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, JSON, ForeignKey
+from sqlalchemy import Column, Integer, String, JSON, ForeignKey
 from gitar_website.database import Base
 
 
@@ -56,7 +56,8 @@ class Chords(Base):
     """table for lyrics with chords"""
     name = Column(String(128))  # name of the song.
     known_as = Column(String(64))  # alternative name for the song
-    chord_data = JSON  # the chords and other related data to the song.
+    #  chord_data should be changed to json type when we switch to mysql.
+    chord_data = Column(JSON)  # the chords and other related data to the song.
 
     def __init__(self, name=None, known_as=None, chord_data=None):
         self.name = name
