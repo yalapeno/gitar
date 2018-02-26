@@ -3,5 +3,6 @@ import os
 _basedir = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = False
-DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'gitar.db')
+tst_psw = "your password"
+DATABASE_URI = "mysql+pymysql://root:" + tst_psw + "@localhost/gitar"
 del os
