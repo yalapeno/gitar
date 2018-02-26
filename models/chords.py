@@ -8,6 +8,21 @@ class Genre(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(64))  # name of the genre.
 
+    def __init__(self, name=None):
+        self.name = name
+
+    def __repr__(self):
+        return f"<Genre {self.name}>"
+
+    def to_json(self):
+        return dict(name=self.name)
+
+    def __eq__(self, other):
+        return type(self) is type(other) and self.id == other.id
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class Artist(Base):
     """table for info about artists."""
@@ -32,8 +47,12 @@ class Artist(Base):
 
 
 class GenreReference(Base):
-    """table for music genres of artists. maps artist ids to genre ids in corresponding tables."""
+    """table for music genres of artists. maps artist ids to genre ids in artists and genres tables."""
     __tablename__ = "genre_reference"
     id = Column(Integer, primary_key=True) # id for the entry. not sure if it's needed.
     artist_id = Column(Integer, ForeignKey("artists.id"))
     genre_id = Column(Integer, ForeignKey("genres.id"))
+
+    def __init__(self, artist_id=None, genre_id=None):
+        self.artist_id = artist_id
+        self.genre_id = genre_id
