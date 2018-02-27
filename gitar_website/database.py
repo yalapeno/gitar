@@ -1,10 +1,12 @@
-from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from gitar_website import app
-from sqlalchemy import Column, Integer, TIMESTAMP
 from datetime import datetime
+
+from sqlalchemy import Column, Integer, TIMESTAMP
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.orm import scoped_session, sessionmaker
+
+from gitar_website import app
 
 
 class Base(object):
@@ -28,7 +30,6 @@ Base.query = db_session.query_property()
 
 
 def init_db():
-    import models.chords
     Base.metadata.create_all(bind=engine)
 
 

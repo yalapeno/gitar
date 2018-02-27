@@ -1,5 +1,5 @@
-from models.chords import *
 from gitar_website.database import db_session
+from gitar_website.models.chords import *
 
 
 def populate():
