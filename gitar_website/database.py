@@ -3,7 +3,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from gitar_website import app
-from sqlalchemy import Column, Integer
+from sqlalchemy import Column, Integer, TIMESTAMP
+from datetime import datetime
 
 
 class Base(object):
@@ -15,6 +16,8 @@ class Base(object):
     __table_args__ = {'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)  # every table has an id as primary key
+    added = Column(TIMESTAMP, default=datetime.now())
+    updated = Column(TIMESTAMP, default=datetime.now(), onupdate=datetime.now())
 
 
 engine = create_engine(app.config["DATABASE_URI"], convert_unicode=True)

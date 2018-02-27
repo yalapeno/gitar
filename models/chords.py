@@ -43,7 +43,7 @@ class Artists(Base):
 
 
 class GenreReferences(Base):
-    """table for music genres of artists. maps artist ids to genre ids in artists and genres tables."""
+    """table for music genres of artists. maps artist ids to genre ids."""
     artist_id = Column(Integer, ForeignKey("artists.id"))
     genre_id = Column(Integer, ForeignKey("genres.id"))
 
@@ -55,11 +55,34 @@ class GenreReferences(Base):
 class Chords(Base):
     """table for lyrics with chords"""
     name = Column(String(128))  # name of the song.
-    known_as = Column(String(64))  # alternative name for the song
-    #  chord_data should be changed to json type when we switch to mysql.
+    known_as = Column(String(64))  # alternative name for the song.
     chord_data = Column(JSON)  # the chords and other related data to the song.
+    artist_id = Column(Integer, ForeignKey("artists.id"))
 
-    def __init__(self, name=None, known_as=None, chord_data=None):
+    def __init__(self, name=None, known_as=None, chord_data=None, artist_id=None):
         self.name = name
         self.known_as = known_as
         self.chord_data = chord_data
+        self.artist_id = artist_id
+
+    def __repr__(self):
+        return f"<Chord {self.name}>"
+
+    def to_json(self):
+        return dict(name=self.name)
+
+    def __eq__(self, other):
+        return type(self) is type(other) and self.id == other.id
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+
+class ChordGenreReferences(Base):
+    """table for music genres of song chords. maps chord ids to genre ids."""
+    chord_id = Column(Integer, ForeignKey("chords.id"))
+    genre_id = Column(Integer, ForeignKey("genres.id"))
+
+    def __init__(self, chord_id=None, genre_id=None):
+        self.chord_id = chord_id
+        self.genre_id = genre_id
