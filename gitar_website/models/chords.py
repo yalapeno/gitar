@@ -34,7 +34,7 @@ class Artists(Base):
         return f"<Artist {self.name}>"
 
     def to_json(self):
-        return dict(name=self.name)
+        return jsonify(dict(name=self.name))
 
     def __eq__(self, other):
         return type(self) is type(other) and self.id == other.id
@@ -70,7 +70,7 @@ class Chords(Base):
         return f"<Chord {self.name}>"
 
     def to_json(self):
-        return dict(name=self.name)
+        return jsonify(dict(name=self.name))
 
     def __eq__(self, other):
         return type(self) is type(other) and self.id == other.id
