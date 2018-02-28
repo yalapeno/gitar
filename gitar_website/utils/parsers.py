@@ -32,8 +32,7 @@ with open("deneme.txt", "w") as f:
         last_length = 0
         for (position_start, position_end, chord) in positions:
             chord_line += f"{(whitespace *(position_start - last_end - last_length))}{chord.strip('[]')}"
-            last_
-            end = position_end
+            last_end = position_end
             last_length = len(chord) - 2
         f.write(chord_line + "\n")
         f.write(lyrics_line + "\n")
