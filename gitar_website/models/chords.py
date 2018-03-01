@@ -43,7 +43,7 @@ class Artists(Base):
         return not self.__eq__(other)
 
 
-class GenreReferences(Base):
+class ArtistGenreReferences(Base):
     """table for music genres of artists. maps artist ids to genre ids."""
     artist_id = Column(Integer, ForeignKey("artists.id"))
     genre_id = Column(Integer, ForeignKey("genres.id"))
