@@ -11,6 +11,7 @@ class ParseChordsPro:
         self.lines = []  # each element is a lyric line with the chords on right position(2 lines)
 
     def parse(self):
+        """Parse the initialized chords_pro_string."""
         lines = self.chords_pro_string.strip().split("\n")
 
         for line in lines:
