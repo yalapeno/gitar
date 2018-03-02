@@ -1,5 +1,7 @@
 from flask import Flask
+from flask_restful import Api
 app = Flask(__name__)
+api = Api(app)
 app.config.from_object("websiteconfig")
 
 
@@ -17,3 +19,6 @@ def shutdown_session(exception=None):
 from gitar_website.views import general
 app.register_blueprint(general.mod)
 
+from gitar_website.resources.resources import GenresResource
+
+api.add_resource(GenresResource, "/genres/<string:id>")

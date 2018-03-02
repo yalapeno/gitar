@@ -15,7 +15,7 @@ def populate():
 
     genre_1 = Genres(name="Halk Muzigi")
     artist_1 = Artists(name="Ahmet Kaya")
-    genre_ref_1 = GenreReferences(artist_id=1, genre_id=1)
+    genre_ref_1 = ArtistGenreReferences(artist_id=1, genre_id=1)
     chords_1 = Chords(name="İçimde Ölen Biri Var", known_as="Depremler Oluyor Beynimde", chord_data=chord_data, artist_id=1)
     chord_genre_1 = ChordGenreReferences(chord_id=1, genre_id=1)
     db_session.add(genre_1)

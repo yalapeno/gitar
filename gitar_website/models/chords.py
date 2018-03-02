@@ -34,7 +34,7 @@ class Artists(Base):
         return f"<Artist {self.name}>"
 
     def to_json(self):
-        return dict(name=self.name)
+        return jsonify(dict(name=self.name))
 
     def __eq__(self, other):
         return type(self) is type(other) and self.id == other.id
@@ -43,7 +43,7 @@ class Artists(Base):
         return not self.__eq__(other)
 
 
-class GenreReferences(Base):
+class ArtistGenreReferences(Base):
     """table for music genres of artists. maps artist ids to genre ids."""
     artist_id = Column(Integer, ForeignKey("artists.id"))
     genre_id = Column(Integer, ForeignKey("genres.id"))
@@ -70,7 +70,7 @@ class Chords(Base):
         return f"<Chord {self.name}>"
 
     def to_json(self):
-        return dict(name=self.name)
+        return jsonify(dict(name=self.name))
 
     def __eq__(self, other):
         return type(self) is type(other) and self.id == other.id
