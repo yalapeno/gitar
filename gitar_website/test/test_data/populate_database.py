@@ -1,5 +1,6 @@
 from gitar_website.database import db_session
 from gitar_website.models.chords import *
+from gitar_website.models.users import *
 
 
 def populate():
@@ -18,5 +19,13 @@ def populate():
     genre_ref_1 = ArtistGenreReferences(artist_id=1, genre_id=1)
     chords_1 = Chords(name="İçimde Ölen Biri Var", known_as="Depremler Oluyor Beynimde", chord_data=chord_data, artist_id=1)
     chord_genre_1 = ChordGenreReferences(chord_id=1, genre_id=1)
-    db_session.add(genre_1)
+    user_1 = Users(username="lala", email="somemail@mail.com", password_hash="somehash")
+
+    # committing 1-2 at a time because of the foreign key constraints.
+    db_session.add(user_1)
+    db_session.add_all([genre_1, artist_1])
+    db_session.commit()
+    db_session.add_all([genre_ref_1, chords_1])
+    db_session.commit()
+    db_session.add(chord_genre_1)
     db_session.commit()

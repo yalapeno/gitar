@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String
 from gitar_website.database import Base
+from flask import jsonify
 
 
 class Users(Base):
