@@ -25,12 +25,14 @@ class Base(object):
 engine = create_engine(app.config["DATABASE_URI"], convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
+
 Base = declarative_base(cls=Base)
 Base.query = db_session.query_property()
 
 
 def init_db():
-    from gitar_website.models.chords import Genres
+    from gitar_website.models.chords import Genres, Artists, ArtistGenreReferences, Chords, ChordGenreReferences
+    from gitar_website.models.users import Users
     Base.metadata.create_all(bind=engine)
 
 
