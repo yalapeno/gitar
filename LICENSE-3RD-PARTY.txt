@@ -1,0 +1,4 @@
+pychopro (gitar/gitar_website/chopro)
+Original Source:                https://github.com/jontsai/pychopro
+Original Copyright:             Copyright (c) 2017 Jonathan Tsai
+Original License:               MIT
