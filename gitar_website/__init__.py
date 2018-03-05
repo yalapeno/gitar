@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_restful import Api
 from flask_migrate import Migrate
+from flask_login import LoginManager
 app = Flask(__name__)
 api = Api(app)
+login = LoginManager(app)
 app.config.from_object("websiteconfig")
 
 
@@ -12,11 +14,14 @@ init_db()
 from gitar_website.test.test_data import populate_database
 populate_database.populate()
 
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
 
+from gitar_website.models.users import Users
+@login.user_loader
+def load_user(id):
+    return Users.query.get(int(id))
 
 from gitar_website.views import general
 app.register_blueprint(general.mod)
