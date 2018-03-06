@@ -4,3 +4,9 @@ GENRES_FIELDS = {
     'added': fields.DateTime,
     'name': fields.String
 }
+
+ARTIST_CHORDS_FIELDS = {
+    "id": fields.Integer,
+    "name": fields.String,
+    "known_as": fields.String
+}

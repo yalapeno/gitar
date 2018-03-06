@@ -33,6 +33,7 @@ Base.query = db_session.query_property()
 def init_db():
     from gitar_website.models.chords import Genres, Artists, ArtistGenreReferences, Chords, ChordGenreReferences
     from gitar_website.models.users import Users
+    Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
 

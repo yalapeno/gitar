@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, JSON, ForeignKey
+from sqlalchemy.orm import relationship, deferred
 from gitar_website.database import Base
 from flask import jsonify
 
@@ -26,6 +27,8 @@ class Genres(Base):
 class Artists(Base):
     """table for info about artists."""
     name = Column(String(128))  # name and surname of the artist.
+    chords = relationship("Chords", backref="singer", lazy="dynamic")
+    genres = relationship("ArtistGenreReferences", backref="genre_reference", lazy="dynamic")
 
     def __init__(self, name=None):
         self.name = name
@@ -57,7 +60,7 @@ class Chords(Base):
     """table for lyrics with chords"""
     name = Column(String(128))  # name of the song.
     known_as = Column(String(64))  # alternative name for the song.
-    chord_data = Column(JSON)  # the chords and other related data to the song.
+    chord_data = deferred(Column(JSON))  # the chords and other related data to the song.
     artist_id = Column(Integer, ForeignKey("artists.id"))
 
     def __init__(self, name=None, known_as=None, chord_data=None, artist_id=None):
@@ -70,7 +73,7 @@ class Chords(Base):
         return f"<Chord {self.name}>"
 
     def to_json(self):
-        return jsonify(dict(name=self.name))
+        return jsonify(dict(name=self.name, chord_data=self.chord_data))
 
     def __eq__(self, other):
         return type(self) is type(other) and self.id == other.id
