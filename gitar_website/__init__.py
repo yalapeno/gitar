@@ -26,7 +26,8 @@ def load_user(id):
 from gitar_website.views import general
 app.register_blueprint(general.mod)
 
-from gitar_website.resources.resources import GenresResource, ArtistChordsResource
+from gitar_website.resources.resources import GenresResource, ArtistChordsResource, ChordResource
 
 api.add_resource(GenresResource, "/genres/<string:id>")
 api.add_resource(ArtistChordsResource, "/chords/<string:id>")
+api.add_resource(ChordResource, "/chord/<string:id>")

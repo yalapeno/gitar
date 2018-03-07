@@ -10,3 +10,11 @@ ARTIST_CHORDS_FIELDS = {
     "name": fields.String,
     "known_as": fields.String
 }
+
+CHORD_FIELDS = {
+    "id": fields.Integer,
+    "name": fields.String,
+    "known_as": fields.String,
+    "chord_data": fields.Raw,
+    "artist_id": fields.Integer
+}

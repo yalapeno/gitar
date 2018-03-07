@@ -1,6 +1,6 @@
 from flask_restful import Resource, marshal_with, abort
-from gitar_website.resources import GENRES_FIELDS, ARTIST_CHORDS_FIELDS
-from gitar_website.models.chords import Genres, Artists
+from gitar_website.resources import GENRES_FIELDS, ARTIST_CHORDS_FIELDS, CHORD_FIELDS
+from gitar_website.models.chords import Genres, Artists, Chords
 
 
 class GenresResource(Resource):
@@ -21,3 +21,12 @@ class ArtistChordsResource(Resource):
             abort(404, message=f"Artist with id {id} doesn't exist")
         chords = artist.chords.all()
         return chords
+
+class ChordResource(Resource):
+    @marshal_with(CHORD_FIELDS)
+    def get(self, id):
+        chord = Chords.query.filter_by(id=id).first()
+        if not chord:
+            abort(404, message=f"Chord with id {id} doesn't exist")
+        return chord
+
