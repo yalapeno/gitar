@@ -7,15 +7,16 @@ guitar chords and tabs
 pip install -r requirements.txt
 
 # run server
-1- go to the directory with "manage.py"
+1- only the first time you are running the project, create a mysql database named "gitar" manually. Enter your password where it says "your password" in gitar/gitar/settings.py
 
-2- only the first time you are running the project, create a mysql database named "gitar" manually. Enter your password where it says "your password" in gitar/gitar/settings.py
+2- go to the directory with "manage.py"
+
 
 3- only the first time you are running the project after creating the database:
 
 >python manage.py migrate
 
-3- start the server
+4- start the server
 
 >python manage.py runserver
 
