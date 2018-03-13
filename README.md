@@ -19,6 +19,15 @@ pip install -r requirements.txt
 
 >python manage.py runserver
 
+# populate empty database
+1- go to the directory with "manage.py"
+
+2- run python shell with django
+>python manage.py shell
+
+3- run this line of code:
+>exec(open("populate_database.py", "r").read())
+
 
 
 
