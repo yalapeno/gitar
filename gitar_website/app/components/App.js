@@ -4,28 +4,34 @@ var axios = require('axios');
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {persons: []};
+    this.state = {posts: []};
+
+	this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    // TODO Implement this. Also make space for button
+    axios.get('http://www.reddit.com/r/cyberpunk.json')
+      .then(res => {
+        const posts = res.data.data.children.map(obj => obj.data);
+        this.setState({ posts });
+      });
   }
 
   componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
-      .then(res => {
-        const persons = res.data;
-        this.setState({ persons });
-      })
+    // do nothing.
   }
 
   render() {
     return (
       <ul>
+	<button onClick={this.handleClick}>Click me!</button><p></p>
 
-	<button></button>
-
-        { this.state.persons.map(person => <li>{person.name}</li>)}
+        <h1>{`/r/cyberpunk`}</h1>
+        <ul>
+          {this.state.posts.map(post =>
+            <li key={post.id}>{post.title}</li>
+          )}
+        </ul>
       </ul>
     )
   }
