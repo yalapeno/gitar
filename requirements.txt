@@ -1,6 +1,5 @@
-PyMySQL==0.8.0
-SQLAlchemy==1.2.2
-Flask==0.12.2
-flask-migrate==2.1.1
-flask-login==0.4.1
-flask-restful==0.3.6
+drf_nested_routers==0.90.2
+django_mysql==2.2.0
+Django==2.0.3
+djangorestframework==3.7.7
+rest_framework_nested==0.1.0
