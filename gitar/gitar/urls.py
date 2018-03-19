@@ -18,20 +18,27 @@ from django.urls import path
 from django.conf.urls import url, include
 #  from rest_framework import routers
 from rest_framework_nested import routers
-
 from chords import views
+from gitar import login_views
+
 
 router = routers.DefaultRouter()
 router.register(r"artist", views.ArtistViewSet)
+
 
 artists_router = routers.NestedDefaultRouter(router, r"artist", lookup="artist")
 artists_router.register(r"chord", views.ChordWithDataViewSet)
 router.register(r"genre", views.GenreViewSet)
 
 
+router.register(r"user", login_views.UserViewSet)
+router.register(r"groups", login_views.GroupViewSet)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r"^", include(router.urls)),
     url(r"^", include(artists_router.urls)),
-    url(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework"))
+    url(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    url(r"^o/", include("oauth2_provider.urls", namespace="oauth2_provider"))
 ]

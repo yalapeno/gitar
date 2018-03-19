@@ -2,4 +2,4 @@ drf_nested_routers==0.90.2
 django_mysql==2.2.0
 Django==2.0.3
 djangorestframework==3.7.7
-rest_framework_nested==0.1.0
+django-oauth-toolkit==1.0.0
